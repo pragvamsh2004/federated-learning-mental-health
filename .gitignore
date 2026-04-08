@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Models
+*.pt
+*.pkl
+*.h5
+saved_models/
+
+# Dataset
+data/
+*.csv
+
+# Node
+node_modules/
+build/
+dist/
+
+# Misc
+.DS_Store

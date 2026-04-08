@@ -1,0 +1,26 @@
+# Core Python
+numpy
+pandas
+
+# Machine Learning
+torch
+scikit-learn
+
+# Federated Learning
+flwr
+
+# Backend API
+fastapi
+uvicorn
+pydantic
+python-multipart
+
+# Visualization / Evaluation
+matplotlib
+seaborn
+
+# PDF & Reporting (if backend-side reporting ever used)
+reportlab
+
+# Utilities
+tqdm
