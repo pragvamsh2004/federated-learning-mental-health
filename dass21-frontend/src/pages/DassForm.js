@@ -299,8 +299,10 @@ export default function DassForm() {
 
     try {
       setSubmitting(true);
-      const res = await axios.post("http://127.0.0.1:8000/predict", answers);
-
+      const res = await axios.post(
+      "https://federated-learning-mental-health.onrender.com/predict",
+      answers
+      );
       navigate("/result", { state: res.data });
     } catch (err) {
       console.error(err);
