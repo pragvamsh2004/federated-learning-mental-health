@@ -11,8 +11,8 @@ venv/
 saved_models/
 
 # Dataset
-data/
-*.csv
+data/*
+!data/DASS.csv
 
 # Node
 node_modules/

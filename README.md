@@ -116,7 +116,7 @@ python dataset_split.py
 
 ✔ Lightweight & efficient
 ✔ Ideal for tabular healthcare data
-
+[run ./models]
 ---
 
 ## 🧪 Federated Training
@@ -137,16 +137,16 @@ python fl/client_stress.py --cid 4
 ```bash
 python fl/server_anxiety.py
 python fl/client_anxiety.py --cid 1
-(similarly for all 4 )
 ```
+(similarly for all 4 )
 
 ### 🔹 Depression Model
 
 ```bash
 python fl/server_depression.py
 python fl/client_depression.py --cid 1
-(similarly for all 4)
 ```
+(similarly for all 4)
 ✔ Models are saved in .pt format inside saved_models/
 
 ---
