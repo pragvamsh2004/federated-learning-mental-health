@@ -6,9 +6,11 @@ from typing import Dict
 
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(CURRENT_DIR)
+
 if ROOT_DIR not in sys.path:
     sys.path.append(ROOT_DIR)
 
@@ -20,23 +22,32 @@ app = FastAPI(
     description="Backend API for stress, anxiety, and depression prediction using federated models.",
     version="1.0.0",
 )
-from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # You can restrict later if needed
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # <-- Allows OPTIONS!
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Load predictor once at startup
+# ✅ GLOBAL VARIABLE
+predictor = None
 MODEL_DIR = os.path.join(ROOT_DIR, "saved_models")
-predictor = DASSFederatedPredictor(MODEL_DIR)
+
+
+# ✅ LOAD MODEL SAFELY AT STARTUP
+@app.on_event("startup")
+def load_model():
+    global predictor
+    try:
+        predictor = DASSFederatedPredictor(MODEL_DIR)
+        print("✅ Models loaded successfully")
+    except Exception as e:
+        print("❌ Error loading models:", e)
 
 
 class DASSInput(BaseModel):
-    # 27 fields (same as training)
     Q1_1: float
     Q1_2: float
     Q1_3: float
@@ -79,11 +90,12 @@ def root():
 
 @app.post("/predict")
 def predict_dass(input_data: DASSInput) -> Dict:
-    """
-    Accepts a single user's responses and returns scores + severity levels.
-    """
+    if predictor is None:
+        return {"error": "Model not loaded"}
+
     features = input_data.dict()
     result = predictor.predict(features)
+
     return {
         "input": features,
         "prediction": result,
