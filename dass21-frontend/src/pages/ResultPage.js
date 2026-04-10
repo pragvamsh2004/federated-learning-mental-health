@@ -77,13 +77,18 @@ export default function ResultPage() {
       case "Moderate":
         return "#ff9800"; // orange
       case "Severe":
-        return "#f44336"; // red
+        return "#ff7043"; // red
       case "Extremely Severe":
-        return "#b71c1c"; // dark red
+        return "#ff5252"; // dark red
       default:
         return "#90a4ae";
     }
   };
+  const displayLevel = (level) => {
+  if (level === "Severe") return "High";
+  if (level === "Extremely Severe") return "Very High";
+  return level;
+};
 
   // ---- Assessment summary messages ----
   const domainSummary = (name, level) => {
@@ -95,9 +100,9 @@ export default function ResultPage() {
       case "Moderate":
         return `${name} is in a moderate range, suggesting that symptoms may be affecting your daily routines or concentration at times.`;
       case "Severe":
-        return `Your ${name.toLowerCase()} is in a severe range. Symptoms may be significantly affecting your mood, energy, or functioning.`;
+        return `Your ${name.toLowerCase()} levels are elevated. With the right support, this can be managed effectively.`;
       case "Extremely Severe":
-        return `${name} is in a very high range. This level of symptoms can strongly impact wellbeing and usually requires timely professional support.`;
+        return `${name} levels are quite high right now, but improvement is absolutely possible with support.`;
       default:
         return `No clear interpretation is available for ${name.toLowerCase()}.`;
     }
@@ -303,7 +308,7 @@ export default function ResultPage() {
         {title}
       </Typography>
       <Typography variant="body2">
-        Score (0–21): {score.toFixed(2)}
+        Score (0–42): {score.toFixed(2)}
       </Typography>
       <Box
         sx={{
@@ -318,7 +323,7 @@ export default function ResultPage() {
           backgroundColor: severityColor(level),
         }}
       >
-        {level}
+        {displayLevel(level)}
       </Box>
     </Box>
   );
@@ -381,7 +386,7 @@ export default function ResultPage() {
       }
 
       y = addWrappedText(
-        "This report summarises your current stress, anxiety, and depression levels based on your responses to the DASS-21 questionnaire. Scores range from 0 to 21 in each domain; higher scores indicate higher symptom severity.",
+        "This report summarises your current stress, anxiety, and depression levels based on your responses to the DASS-21 questionnaire. Scores range from 0 to 42 in each domain; higher scores indicate higher symptom severity.",
         marginX,
         y,
         usableWidth,
@@ -427,7 +432,7 @@ export default function ResultPage() {
       doc.setFont("helvetica", "bold");
       doc.setFontSize(12);
       doc.setTextColor(0, 0, 80);
-      doc.text("Symptom Severity Profile (0–21)", marginX, y);
+      doc.text("Symptom Severity Profile (0–42)", marginX, y);
       y += 6;
 
       doc.setFont("helvetica", "normal");
@@ -441,8 +446,8 @@ export default function ResultPage() {
           y = 20;
         }
         doc.text(`${label}`, marginX, y);
-        doc.text(`Score: ${score.toFixed(2)} / 21`, marginX + 45, y);
-        doc.text(`Level: ${level}`, marginX + 100, y);
+        doc.text(`Score: ${score.toFixed(2)} / 42`, marginX + 45, y);
+        doc.text(`Level: ${displayLevel(level)}`, marginX + 100, y);
         y += rowHeight;
       };
 
@@ -526,7 +531,7 @@ export default function ResultPage() {
           doc.setFont("helvetica", "bold");
           doc.setFontSize(12);
           doc.setTextColor(0, 0, 0);
-          doc.text("Symptom Severity Pie Chart (0–21)", marginX, 20);
+          doc.text("Symptom Severity Pie Chart (0–42)", marginX, 20);
 
           const chartScale = 0.55;
           const imgWidth = usableWidth * chartScale;

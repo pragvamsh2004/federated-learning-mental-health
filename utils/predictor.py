@@ -64,11 +64,17 @@ class DASSFederatedPredictor:
         x = self._prepare_input(features)
 
         with torch.no_grad():
-            stress_score = float(self.stress_model(x).cpu().numpy()[0][0])
-            anxiety_score = float(self.anxiety_model(x).cpu().numpy()[0][0])
-            depression_score = float(self.depression_model(x).cpu().numpy()[0][0])
+            # 🔹 Raw model outputs (0–21 range)
+            stress_raw = float(self.stress_model(x).cpu().numpy()[0][0])
+            anxiety_raw = float(self.anxiety_model(x).cpu().numpy()[0][0])
+            depression_raw = float(self.depression_model(x).cpu().numpy()[0][0])
 
-        # Map to severity categories
+        # 🔥 Scale to DASS-21 standard (0–42)
+        stress_score = round(stress_raw * 2, 2)
+        anxiety_score = round(anxiety_raw * 2, 2)
+        depression_score = round(depression_raw * 2, 2)
+
+        # 🔹 Map to severity categories (now correct scale)
         stress_level = stress_severity(stress_score)
         anxiety_level = anxiety_severity(anxiety_score)
         depression_level = depression_severity(depression_score)
@@ -86,4 +92,4 @@ class DASSFederatedPredictor:
                 "score": depression_score,
                 "level": depression_level,
             },
-        }
+    }
