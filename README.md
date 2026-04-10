@@ -12,7 +12,7 @@
 
 ---
 
-## 🎯 Demo Flow
+##  Demo Flow
 
 1. Fill DASS-21 questionnaire
 2. Get predictions (Stress, Anxiety, Depression)
@@ -21,7 +21,7 @@
 
 ---
 
-## 🚀 Overview
+##  Overview
 
 This project is a **privacy-preserving mental health assessment system** built using **Federated Learning**.
 
@@ -38,7 +38,7 @@ The system provides:
 
 ---
 
-## 💡 Why This Project Matters
+##  Why This Project Matters
 
 Mental health data is highly sensitive. Traditional ML systems require centralizing user data, which raises privacy concerns.
 
@@ -50,9 +50,9 @@ This project solves that by:
 
 ---
 
-## 📊 Dataset
+##  Dataset
 
-📂 Included in repository: `data/DASS.csv`
+ Included in repository: `data/DASS.csv`
 
 * Based on **DASS-21 questionnaire**
 * 27 input features
@@ -63,7 +63,7 @@ This project solves that by:
 
 ---
 
-## ⚡ Quick Start
+##  Quick Start
 
 ```bash
 git clone https://github.com/your-username/federated_dass21_app.git
@@ -79,7 +79,7 @@ python dataset_split.py
 
 ---
 
-## 🧹 Data Preprocessing
+##  Data Preprocessing
 
 ```bash
 python preprocess_dataset.py
@@ -90,7 +90,7 @@ python preprocess_dataset.py
 
 ---
 
-## 🔀 Dataset Splitting
+##  Dataset Splitting
 
 ```bash
 python dataset_split.py
@@ -107,7 +107,7 @@ python dataset_split.py
 
 ---
 
-## 🧠 Model
+##  Model
 
 * MLP (Multi-Layer Perceptron)
 * Input: 27 features
@@ -119,7 +119,7 @@ python dataset_split.py
 [run ./models]
 ---
 
-## 🧪 Federated Training
+##  Federated Training
 
 ### 🔹 Stress Model
 
@@ -152,7 +152,7 @@ python fl/client_depression.py --cid 1
 ---
 
 
-## 📊 Model Performance [run /tests]
+##  Model Performance [run /tests]
 
 * Stress: **87.05%**
 * Anxiety: **76.31%**
@@ -163,7 +163,7 @@ python fl/client_depression.py --cid 1
 
 ---
 
-## 🚀 Run Application
+##  Run Application
 
 ### Backend
 
@@ -182,7 +182,7 @@ npm start
 
 ---
 
-## 📸 Screenshots  
+##  Screenshots  
 
 ### 🏠 Home Page  
 ![Home](images/home.png)
@@ -195,7 +195,7 @@ npm start
 ![Results](images/result.png)
 
 
-## 📂 Project Structure
+##  Project Structure
 
 ```bash
 federated_dass21_app/
@@ -211,7 +211,7 @@ federated_dass21_app/
 
 ---
 
-## 📌 Future Work
+##  Future Work
 
 * Differential Privacy
 * Leave-One-Client-Out evaluation
@@ -220,7 +220,7 @@ federated_dass21_app/
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **K Pragvamsh**
 AI | Federated Learning 

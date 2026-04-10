@@ -105,64 +105,147 @@ export default function ResultPage() {
 
   // ---- Personalized recommendations (tone C) ----
   const improvementSuggestions = (name, level) => {
-    const lower = name.toLowerCase();
-    switch (level) {
-      case "Normal":
-        return {
-          intro: `Your ${lower} is currently in a healthy range. To maintain this level of wellbeing, you may benefit from:`,
-          bullets: [
-            "Keeping regular sleep and wake times.",
-            "Maintaining balanced study/work and rest periods.",
-            "Continuing positive habits that help you relax (music, walks, hobbies).",
-          ],
-        };
-      case "Mild":
-        return {
-          intro: `There are mild signs of ${lower}. Small, consistent changes can help prevent these symptoms from increasing:`,
-          bullets: [
-            "Scheduling short breaks between tasks instead of working continuously.",
-            "Practising simple breathing or brief mindfulness once or twice a day.",
-            "Limiting screen time late at night and keeping a regular sleep schedule.",
-          ],
-        };
-      case "Moderate":
-        return {
-          intro: `${name} is in a moderate range. It may help to actively build a structured self-care routine:`,
-          bullets: [
-            "Doing light physical activity (even 10–20 minutes of walking) most days of the week.",
-            "Using a journal or notes app to track triggers, thoughts, and emotions.",
-            "Talking openly with a trusted friend, family member, or mentor about how you feel.",
-          ],
-        };
-      case "Severe":
-        return {
-          intro: `${name} is in a higher range. In addition to self-care, professional support is strongly recommended:`,
-          bullets: [
-            "Scheduling an appointment with a counselor, psychologist, or mental health professional.",
-            "Creating a simple daily structure (wake time, meals, tasks, wind-down time).",
-            "Reducing alcohol or substance use, if applicable, as these can worsen symptoms.",
-          ],
-        };
-      case "Extremely Severe":
-        return {
-          intro: `${name} is in a very high range. Professional help is strongly advised as soon as possible:`,
-          bullets: [
-            "Reaching out to a qualified mental health professional for a detailed assessment.",
-            "Sharing how you feel with someone you trust instead of managing everything alone.",
-            "If you ever feel unable to cope or unsafe, seeking urgent support from local medical or mental health services.",
-          ],
-        };
-      default:
-        return {
-          intro: `No specific guidance is available for ${lower}, but general wellbeing strategies may still be helpful:`,
-          bullets: [
-            "Maintaining regular meals and sleep.",
-            "Staying connected with supportive people.",
-          ],
-        };
-    }
-  };
+    const type = name.toLowerCase();
 
+    const data = {
+      stress: {
+        Normal: {
+          intro: `Your stress is currently in a healthy range. To maintain this level of wellbeing, you may benefit from:`,
+          bullets: [
+            "Maintaining a consistent daily routine to avoid sudden workload spikes.",
+            "Engaging in relaxing activities like walking, music, or hobbies.",
+            "Ensuring a healthy balance between productivity and rest."
+          ]
+        },
+        Mild: {
+          intro: `There are mild signs of stress. Small adjustments can help prevent escalation:`,
+          bullets: [
+            "Breaking large tasks into smaller manageable steps.",
+            "Taking short breaks during long work sessions.",
+            "Practising light relaxation techniques like stretching or breathing."
+          ]
+        },
+        Moderate: {
+          intro: `Stress is in a moderate range. Active management strategies may help:`,
+          bullets: [
+            "Using time-blocking or prioritization techniques.",
+            "Incorporating regular physical activity into your routine.",
+            "Setting realistic expectations to reduce pressure."
+          ]
+        },
+        Severe: {
+          intro: `Stress levels are high. Additional support is recommended:`,
+          bullets: [
+            "Speaking with a counselor or mental health professional.",
+            "Reducing workload and avoiding overcommitment.",
+            "Practising structured stress management techniques."
+          ]
+        },
+        "Extremely Severe": {
+          intro: `Stress is at a very high level. Immediate attention is important:`,
+          bullets: [
+            "Seeking professional help as soon as possible.",
+            "Avoiding high-pressure situations where possible.",
+            "Focusing on rest, recovery, and basic wellbeing."
+          ]
+        }
+      },
+
+      anxiety: {
+        Normal: {
+          intro: `Your anxiety is within a healthy range. To maintain stability:`,
+          bullets: [
+            "Continuing regular sleep and daily routines.",
+            "Staying socially active and engaged.",
+            "Avoiding unnecessary overthinking patterns."
+          ]
+        },
+        Mild: {
+          intro: `There are mild signs of anxiety. Small coping strategies can help:`,
+          bullets: [
+            "Practising breathing exercises (e.g., 4-7-8 method).",
+            "Reducing caffeine and screen exposure before sleep.",
+            "Using grounding techniques during anxious moments."
+          ]
+        },
+        Moderate: {
+          intro: `Anxiety is in a moderate range. Structured techniques may help:`,
+          bullets: [
+            "Practising CBT-based thought reframing.",
+            "Tracking triggers and patterns of anxiety.",
+            "Limiting exposure to known stressors."
+          ]
+        },
+        Severe: {
+          intro: `Anxiety levels are high. Professional support is recommended:`,
+          bullets: [
+            "Consulting a therapist or counselor.",
+            "Using guided relaxation or therapy apps.",
+            "Building coping strategies for recurring triggers."
+          ]
+        },
+        "Extremely Severe": {
+          intro: `Anxiety is at a very high level. Immediate support is important:`,
+          bullets: [
+            "Seeking professional help urgently.",
+            "Avoiding overwhelming environments.",
+            "Practising calming techniques under guidance."
+          ]
+        }
+      },
+
+      depression: {
+        Normal: {
+          intro: `Your mood is currently stable. To maintain emotional wellbeing:`,
+          bullets: [
+            "Staying socially connected with friends and family.",
+            "Engaging in activities you enjoy regularly.",
+            "Maintaining a consistent daily routine."
+          ]
+        },
+        Mild: {
+          intro: `There are mild signs of low mood. Small steps can help improve it:`,
+          bullets: [
+            "Getting sunlight and fresh air daily.",
+            "Engaging in light physical activity.",
+            "Keeping yourself involved in simple productive tasks."
+          ]
+        },
+        Moderate: {
+          intro: `Depression is in a moderate range. Active steps may help improve wellbeing:`,
+          bullets: [
+            "Journaling thoughts and emotions regularly.",
+            "Setting small, achievable daily goals.",
+            "Talking to someone you trust about how you feel."
+          ]
+        },
+        Severe: {
+          intro: `Depression levels are high. Support is strongly recommended:`,
+          bullets: [
+            "Seeking help from a mental health professional.",
+            "Avoiding isolation and staying connected.",
+            "Focusing on basic self-care routines."
+          ]
+        },
+        "Extremely Severe": {
+          intro: `Depression is at a very high level. Immediate professional help is critical:`,
+          bullets: [
+            "Reaching out to a psychiatrist or therapist urgently.",
+            "Talking to someone you trust immediately.",
+            "Seeking emergency help if you feel unable to cope."
+          ]
+        }
+      }
+    };
+
+    return data[type]?.[level] || {
+      intro: `General wellbeing strategies may help improve your condition:`,
+      bullets: [
+        "Maintain regular sleep and meals.",
+        "Stay connected with supportive people."
+      ]
+    };
+  };
   const stressRec = improvementSuggestions("Stress", stressLevel);
   const anxietyRec = improvementSuggestions("Anxiety", anxietyLevel);
   const depressionRec = improvementSuggestions("Depression", depressionLevel);
